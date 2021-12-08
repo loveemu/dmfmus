@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group 'dmfMus'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['main']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['test']
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "dmfMus.Main"
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
